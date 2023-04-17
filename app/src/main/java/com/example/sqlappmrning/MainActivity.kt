@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btnSave:Button
@@ -34,6 +35,14 @@ class MainActivity : AppCompatActivity() {
             var name_edt = edtName.text.toString().trim()
             var email_edt = edtEmail.text.toString().trim()
             var id_edt = edtID.text.toString().trim()
+            if (name_edt.isEmpty() || email_edt.isEmpty() || id_edt.isEmpty())
+                Toast.makeText(this, "Check your Input", Toast.LENGTH_SHORT).show()
+
+            else{
+                db.execSQL("INSERT INTO users VALUES('"+name_edt+"','"+email_edt+"','"+id_edt+"')")
+                Toast.makeText(this, "DATA SAVED SUCCESSFULLY", Toast.LENGTH_SHORT).show()
+//                message("SUCCESS!!","User saved successfully!!!")
+            }
 
         }
         btnView.setOnClickListener {
